@@ -187,8 +187,8 @@ const Hero = () => {
 
   return (
     <section id={sections.home} className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[url('/IMG-20250902-WA0001 (1).jpg')] bg-cover bg-center"
-        style={{ transform: `translateY(${offsetY * 0.5}px)` }}>
+      <div className="absolute inset-0 z-0 bg-cover bg-center md:bg-fixed"
+        style={{ backgroundImage: `url('/IMG-20250902-WA0001 (1).jpg')`, transform: `translateY(${offsetY * 0.5}px)` }}>
         <div className="absolute inset-0 bg-[#f5f5dc]/50 backdrop-blur-sm"></div>
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-32 sm:py-48 lg:py-64">
@@ -213,7 +213,7 @@ const About = ({ innerRef, isVisible }) => (
   <section ref={innerRef} id={sections.about} className={`py-20 relative overflow-hidden bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center space-y-12 md:space-y-0 md:space-x-12 relative z-10">
       <div className={`md:w-1/2 transform transition-all duration-500 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
-        <img src="https://placehold.co/600x400/080419/f5f5dc?text=Bakery" alt="Bakery interior" className="rounded-lg shadow-xl" />
+        <img src="4.png" alt="Bakery interior" className="rounded-lg shadow-xl" />
       </div>
       <div className={`md:w-1/2 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
         <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Mission</h2>
@@ -234,7 +234,7 @@ const Menu = ({ innerRef, isVisible }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl md:text-5xl font-bold font-serif text-[#080419]">Our Menu</h2>
         <p className="mt-4 text-lg text-[#080419]">
-          Explore our wide range of freshly baked French goods.
+          Explore our wide range of freshly baked French creations.
         </p>
 
         {/* Category Navigation */}
@@ -405,7 +405,7 @@ const Footer = () => (
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.771-4.919 4.919-.058.058-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.691-4.771 4.919-4.919.058-.058 1.265-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.435.204-6.73 2.617-6.934 6.934-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.204 4.435 2.617 6.73 6.934 6.934 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.435-.204 6.73-2.617 6.934-6.934.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.204-4.435-2.617-6.73-6.934-6.934zM12 5.5c-3.584 0-6.5 2.916-6.5 6.5s2.916 6.5 6.5 6.5 6.5-2.916 6.5-6.5-2.916-6.5-6.5-6.5zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3.5-9.5c0 .829-.671 1.5-1.5 1.5s-1.5-.671-1.5-1.5.671-1.5 1.5-1.5 1.5.671 1.5 1.5z"/></svg>
         </a>
       </div>
-      <p>&copy; 2024 Le Fournil. All Rights Reserved.</p>
+      <p>&copy; {new Date().getFullYear()} Le Fournil. All Rights Reserved.</p>
       <p className="text-sm text-[#f5f5dc] mt-2">Crafted with passion in Kenya.</p>
     </div>
   </footer>
