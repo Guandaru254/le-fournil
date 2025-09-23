@@ -371,6 +371,12 @@ const Contact = ({ innerRef, isVisible }) => {
           We would love to hear from you!
         </p>
         <div className="mt-8 flex flex-col items-center">
+          <div className="mb-8 text-center text-[#080419]">
+            <p className="font-semibold text-lg">Le Fournil Kenya</p>
+            <p>Enterprise 45, Industrial Area</p>
+            <p>Nairobi, Kenya</p>
+            <p className="mt-2">Phone: <a href="tel:+254116000400" className="text-[#ebb207] hover:underline">0116 000 400</a></p>
+          </div>
           <form onSubmit={handleSubmit} className="bg-[#f5f5dc] rounded-lg p-8 shadow-md max-w-lg w-full text-left">
             <div className="mb-4">
               <label htmlFor="name" className="block text-[#080419] font-medium">Name</label>
@@ -404,6 +410,10 @@ const Footer = () => (
         <a href="#" aria-label="Instagram" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.771-4.919 4.919-.058.058-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.691-4.771 4.919-4.919.058-.058 1.265-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.435.204-6.73 2.617-6.934 6.934-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.204 4.435 2.617 6.73 6.934 6.934 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.435-.204 6.73-2.617 6.934-6.934.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.204-4.435-2.617-6.73-6.934-6.934zM12 5.5c-3.584 0-6.5 2.916-6.5 6.5s2.916 6.5 6.5 6.5 6.5-2.916 6.5-6.5-2.916-6.5-6.5-6.5zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3.5-9.5c0 .829-.671 1.5-1.5 1.5s-1.5-.671-1.5-1.5.671-1.5 1.5-1.5 1.5.671 1.5 1.5z"/></svg>
         </a>
+      </div>
+      <div className="text-sm mb-4">
+        <p>Enterprise 45 Industrial Area, Nairobi </p>
+        <p>Phone: <a href="tel:+254116000400" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">0116 000 400</a></p>
       </div>
       <p>&copy; {new Date().getFullYear()} Le Fournil. All Rights Reserved.</p>
       <p className="text-sm text-[#f5f5dc] mt-2">Crafted with passion in Kenya.</p>
