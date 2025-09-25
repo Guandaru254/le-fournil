@@ -192,7 +192,7 @@ const Hero = () => {
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-32 sm:py-48 lg:py-64">
         <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif text-[#f5f5dc] leading-tight animate-fade-in-up">
-          TASTE THE TRADITION<br />WITH EVERY BITE
+          TASTE THE TRADITION<br />IN EVERY BITE
         </h1>
         <p className="mt-4 text-lg md:text-xl text-[#f5f5dc] animate-fade-in-up animation-delay-300">
           Authentic French flavors, crafted with passion in Nairobi, Kenya.
