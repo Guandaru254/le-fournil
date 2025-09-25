@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-// Tailwind CSS is assumed to be configured in your Next.js project.
-// This single-file component is a conceptual starting point for a modular app.
+import Head from 'next/head';
 
 // --- Helper Functions and Data ---
 
@@ -14,7 +12,7 @@ const shuffleArray = (array) => {
   return array;
 };
 
-// Array of image filenames to be used for the menu items
+// Array of image filenames
 const menuImages = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'];
 const shuffledMenuImages = shuffleArray([...menuImages]);
 
@@ -23,7 +21,6 @@ const sections = {
   about: 'about',
   menu: 'menu',
   testimonials: 'testimonials',
-  gallery: 'gallery',
   contact: 'contact',
 };
 
@@ -32,38 +29,37 @@ const navItems = [
   { name: 'About Us', section: sections.about },
   { name: 'Menu', section: sections.menu },
   { name: 'Testimonials', section: sections.testimonials },
-  { name: 'Gallery', section: sections.gallery },
   { name: 'Contact', section: sections.contact },
 ];
 
 let menuData = {
   'Viennoiseries': [
-    { name: 'Croissant', price: '$4.50', description: 'Flaky, buttery pastry with a rich, golden-brown crust.', image: '' },
-    { name: 'Pain au Chocolat', price: '$5.00', description: 'Buttery, flaky dough wrapped around two sticks of dark chocolate.', image: '' },
-    { name: 'Pain aux Raisins', price: '$5.00', description: 'Swirled pastry with custard and plump raisins.', image: '' },
-    { name: 'Torsade', price: '$4.75', description: 'Twisted pastry with a delicate, sweet filling.', image: '' },
+    { name: 'Croissant', description: 'Flaky, buttery pastry with a rich, golden-brown crust.', image: '' },
+    { name: 'Pain au Chocolat', description: 'Buttery, flaky dough wrapped around two sticks of dark chocolate.', image: '' },
+    { name: 'Pain aux Raisins', description: 'Swirled pastry with custard and plump raisins.', image: '' },
+    { name: 'Torsade', description: 'Twisted pastry with a delicate, sweet filling.', image: '' },
   ],
   'French Pastries': [
-    { name: 'Éclair', price: '$6.00', description: 'Choux pastry filled with rich custard and topped with chocolate ganache.', image: '' },
-    { name: 'Paris-Brest', price: '$7.50', description: 'Ring of choux pastry filled with a praline cream.', image: '' },
-    { name: 'Tarte au Citron', price: '$6.50', description: 'A classic lemon tart with a tangy filling and crisp crust.', image: '' },
-    { name: 'Religieuse', price: '$6.50', description: 'A two-tiered pastry with choux filled with a rich cream.', image: '' },
+    { name: 'Éclair', description: 'Choux pastry filled with rich custard and topped with chocolate ganache.', image: '' },
+    { name: 'Paris-Brest', description: 'Ring of choux pastry filled with a praline cream.', image: '' },
+    { name: 'Tarte au Citron', description: 'A classic lemon tart with a tangy filling and crisp crust.', image: '' },
+    { name: 'Religieuse', description: 'A two-tiered pastry with choux filled with a rich cream.', image: '' },
   ],
   'Fresh Breads': [
-    { name: 'La Baguette', price: '$3.50', description: 'Long, thin loaf with a crispy crust and an airy crumb.', image: '' },
-    { name: 'Pain de Campagne', price: '$8.00', description: 'Rustic, round loaf with a sourdough base and a tangy flavor.', image: '' },
-    { name: 'Brioche', price: '$7.00', description: 'Sweet, rich bread made with eggs and butter for a fluffy texture.', image: '' },
-    { name: 'Pain Complet', price: '$6.50', description: 'Made with whole wheat flour for a wholesome, dense loaf.', image: '' },
-    { name: 'Pain au noix', price: '$7.50', description: 'A delicious bread with the rich flavor of walnuts.', image: '' },
+    { name: 'La Baguette', description: 'Long, thin loaf with a crispy crust and an airy crumb.', image: '' },
+    { name: 'Pain de Campagne', description: 'Rustic, round loaf with a sourdough base and a tangy flavor.', image: '' },
+    { name: 'Brioche', description: 'Sweet, rich bread made with eggs and butter for a fluffy texture.', image: '' },
+    { name: 'Pain Complet', description: 'Made with whole wheat flour for a wholesome, dense loaf.', image: '' },
+    { name: 'Pain au noix', description: 'A delicious bread with the rich flavor of walnuts.', image: '' },
   ],
   'Light Meals': [
-    { name: 'Croque Monsieur', price: '$9.00', description: 'Grilled ham and cheese sandwich on brioche bread, topped with bechamel sauce.', image: '' },
-    { name: 'Quiche Lorraine', price: '$8.00', description: 'Savory tart with bacon, eggs, and cheese in a flaky crust.', image: '' },
+    { name: 'Croque Monsieur', description: 'Grilled ham and cheese sandwich on brioche bread, topped with bechamel sauce.', image: '' },
+    { name: 'Quiche Lorraine', description: 'Savory tart with bacon, eggs, and cheese in a flaky crust.', image: '' },
   ],
   'Coffee & Drinks': [
-    { name: 'Espresso', price: '$2.50', description: 'A strong, concentrated shot of coffee.', image: '' },
-    { name: 'Café au Lait', price: '$4.00', description: 'Strong coffee with steamed milk, a French classic.', image: '' },
-    { name: 'Hot Chocolate', price: '$4.50', description: 'Rich, creamy hot chocolate made with high-quality cocoa.', image: '' },
+    { name: 'Espresso', description: 'A strong, concentrated shot of coffee.', image: '' },
+    { name: 'Café au Lait', description: 'Strong coffee with steamed milk, a French classic.', image: '' },
+    { name: 'Hot Chocolate', description: 'Rich, creamy hot chocolate made with high-quality cocoa.', image: '' },
   ]
 };
 
@@ -88,26 +84,29 @@ const useOnScreen = (ref, rootMargin = '0px') => {
       },
       { rootMargin }
     );
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [ref, rootMargin]);
   return isIntersecting;
 };
 
+// --- Main Components ---
+
 const MobileMenu = ({ isOpen, onClose, onNavClick }) => (
-  <div className={`fixed inset-0 z-50 bg-[#f5f5dc] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-    <div className="flex justify-end p-4">
-      <button onClick={onClose} aria-label="Close menu" className="text-[#080419] text-4xl">
+  <div className={`fixed inset-0 z-50 bg-[#080419] transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    <div className="flex justify-end p-6">
+      <button onClick={onClose} aria-label="Close menu" className="text-[#f5f5dc] text-4xl">
         &times;
       </button>
     </div>
-    <nav className="flex flex-col items-center justify-center space-y-8 h-full">
+    <nav className="flex flex-col items-center justify-center space-y-10 h-full">
       {navItems.map(item => (
         <a
           key={item.name}
@@ -117,7 +116,7 @@ const MobileMenu = ({ isOpen, onClose, onNavClick }) => (
             onNavClick(item.section);
             onClose();
           }}
-          className="text-4xl font-serif font-bold text-[#080419] hover:text-[#ebb207] transition-colors duration-200"
+          className="text-4xl font-serif font-bold text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200"
         >
           {item.name}
         </a>
@@ -132,7 +131,7 @@ const Header = ({ activeSection, onNavClick }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -140,7 +139,7 @@ const Header = ({ activeSection, onNavClick }) => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-[#f5f5dc]/90 backdrop-blur-sm shadow-xl' : 'bg-transparent'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-[#080419]/90 backdrop-blur-sm shadow-xl' : 'bg-transparent'}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex justify-between items-center py-4">
             <div className="flex-shrink-0">
@@ -157,14 +156,14 @@ const Header = ({ activeSection, onNavClick }) => {
                     e.preventDefault();
                     onNavClick(item.section);
                   }}
-                  className={`text-[#080419] hover:text-[#ebb207] transition-colors duration-200 font-medium relative before:absolute before:bottom-0 before:left-1/2 before:w-0 before:h-0.5 before:bg-[#ebb207] before:transition-all before:duration-300 before:-translate-x-1/2 hover:before:w-full ${activeSection === item.section ? 'text-[#080419] font-bold before:w-full' : ''}`}
+                  className={`text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200 font-medium relative before:absolute before:bottom-0 before:left-1/2 before:w-0 before:h-0.5 before:bg-[#ebb207] before:transition-all before:duration-300 before:-translate-x-1/2 hover:before:w-full ${activeSection === item.section ? 'text-[#ebb207] font-bold before:w-full' : ''}`}
                 >
                   {item.name}
                 </a>
               ))}
             </div>
             <div className="md:hidden">
-              <button onClick={() => setIsMobileMenuOpen(true)} aria-label="Open menu" className="text-[#080419] text-3xl">
+              <button onClick={() => setIsMobileMenuOpen(true)} aria-label="Open menu" className="text-[#f5f5dc] text-3xl">
                 &#9776;
               </button>
             </div>
@@ -189,18 +188,18 @@ const Hero = () => {
     <section id={sections.home} className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 z-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: `url('/IMG-20250902-WA0001 (1).jpg')`, transform: `translateY(${offsetY * 0.5}px)` }}>
-        <div className="absolute inset-0 bg-[#f5f5dc]/50 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-[#080419]/60 backdrop-blur-sm"></div>
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-32 sm:py-48 lg:py-64">
-        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif text-[#080419] leading-tight animate-fade-in-up">
+        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif text-[#f5f5dc] leading-tight animate-fade-in-up">
           TASTE THE TRADITION<br />WITH EVERY BITE
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-[#080419] animate-fade-in-up animation-delay-300">
+        <p className="mt-4 text-lg md:text-xl text-[#f5f5dc] animate-fade-in-up animation-delay-300">
           Authentic French flavors, crafted with passion in Nairobi, Kenya.
         </p>
         <a
           href="#menu"
-          className="mt-8 inline-block px-10 py-4 text-lg font-medium text-white bg-[#ebb207] rounded-full hover:bg-[#ebb207] transition-all duration-300 shadow-xl transform hover:-translate-y-1 hover:scale-105 animate-fade-in-up animation-delay-600"
+          className="mt-8 inline-block px-10 py-4 text-lg font-medium text-[#080419] bg-[#ebb207] rounded-full hover:bg-[#d9a206] transition-all duration-300 shadow-xl transform hover:-translate-y-1 hover:scale-105 animate-fade-in-up animation-delay-600"
         >
           Explore Our Menu
         </a>
@@ -216,7 +215,7 @@ const About = ({ innerRef, isVisible }) => (
         <img src="4.png" alt="Bakery interior" className="rounded-lg shadow-xl" />
       </div>
       <div className={`md:w-1/2 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Mission</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Story</h2>
         <p className="mt-4 text-[#080419] leading-relaxed">
           Le Fournil's mission is to deliver an authentic French bakery experience through exceptional quality, traditional craftsmanship, and a commitment to customer satisfaction. By bringing time-honored recipes and baking techniques to Nairobi, we enrich the local community with genuine French flavors, filling a unique niche in the region.
         </p>
@@ -230,10 +229,10 @@ const Menu = ({ innerRef, isVisible }) => {
   const categories = Object.keys(menuData);
 
   return (
-    <section ref={innerRef} id={sections.menu} className={`py-20 bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+    <section ref={innerRef} id={sections.menu} className={`py-20 bg-[#080419] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold font-serif text-[#080419]">Our Menu</h2>
-        <p className="mt-4 text-lg text-[#080419]">
+        <h2 className="text-4xl md:text-5xl font-bold font-serif text-[#f5f5dc]">Our Menu</h2>
+        <p className="mt-4 text-lg text-[#f5f5dc]">
           Explore our wide range of freshly baked French creations.
         </p>
 
@@ -247,8 +246,8 @@ const Menu = ({ innerRef, isVisible }) => {
                 px-6 py-2 rounded-full font-medium text-sm md:text-base
                 transition-all duration-300 transform
                 ${selectedCategory === category
-                  ? 'bg-[#080419] text-[#f5f5dc] shadow-lg scale-105'
-                  : 'bg-transparent text-[#080419] border border-[#080419] hover:bg-[#080419] hover:text-[#f5f5dc] hover:scale-105'
+                  ? 'bg-[#ebb207] text-[#080419] shadow-lg scale-105'
+                  : 'bg-transparent text-[#f5f5dc] border border-[#f5f5dc] hover:bg-[#ebb207] hover:text-[#080419] hover:scale-105'
                 }
               `}
             >
@@ -263,7 +262,7 @@ const Menu = ({ innerRef, isVisible }) => {
             <div
               key={item.name}
               className={`
-                bg-white rounded-2xl shadow-xl overflow-hidden
+                bg-[#f5f5dc] rounded-2xl shadow-xl overflow-hidden
                 transform transition-all duration-500 hover:scale-[1.03]
                 flex flex-col
               `}
@@ -280,9 +279,7 @@ const Menu = ({ innerRef, isVisible }) => {
               <div className="p-6 text-left flex flex-col flex-grow">
                 <h4 className="text-xl font-bold font-serif text-[#080419] mb-1">{item.name}</h4>
                 <p className="text-sm text-gray-600 flex-grow">{item.description}</p>
-                <div className="mt-4 text-right">
-                  <span className="text-2xl font-bold text-[#ebb207]">{item.price}</span>
-                </div>
+                {/* Price removed from here */}
               </div>
             </div>
           ))}
@@ -305,40 +302,9 @@ const Testimonials = ({ innerRef, isVisible }) => {
         <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">What Our Customers Say</h2>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className={`p-8 bg-[#f5f5dc] rounded-lg shadow-md flex flex-col items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
-              <p className="text-lg italic text-[#080419]">"{testimonial.quote}"</p>
-              <p className="mt-4 text-sm font-semibold text-[#080419]">- {testimonial.author}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Gallery = ({ innerRef, isVisible }) => {
-  const images = [
-    "1.png",
-    "2.png",
-    "3.png",
-    "4.png",
-    "5.png",
-    "6.png",
-    "7.png",
-    "8.png",
-  ];
-
-  return (
-    <section ref={innerRef} id={sections.gallery} className={`py-20 bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Creations</h2>
-        <p className="mt-4 text-[#080419]">
-          A glimpse into the art of our baking.
-        </p>
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {images.map((src, index) => (
-            <div key={index} className={`overflow-hidden rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-xl ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
-              <img src={src} alt={`Bakery Item ${index + 1}`} className="w-full h-auto" />
+            <div key={index} className={`p-8 bg-[#080419] text-[#f5f5dc] rounded-lg shadow-md flex flex-col items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
+              <p className="text-lg italic">"{testimonial.quote}"</p>
+              <p className="mt-4 text-sm font-semibold">- {testimonial.author}</p>
             </div>
           ))}
         </div>
@@ -357,27 +323,23 @@ const Contact = ({ innerRef, isVisible }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In a real application, you would send this data to an API
     console.log('Form Submitted:', formData);
-    // Reset form after submission
     setFormData({ name: '', email: '', message: '' });
   };
 
   return (
-    <section ref={innerRef} id={sections.contact} className={`py-20 bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+    <section ref={innerRef} id={sections.contact} className={`py-20 bg-[#080419] text-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Get in Touch</h2>
-        <p className="mt-4 text-[#080419]">
-          We would love to hear from you!
-        </p>
+        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#f5f5dc]">Visit Us</h2>
         <div className="mt-8 flex flex-col items-center">
-          <div className="mb-8 text-center text-[#080419]">
+          <div className="mb-8 text-center text-[#f5f5dc]">
             <p className="font-semibold text-lg">Le Fournil Kenya</p>
             <p>Enterprise 45, Industrial Area</p>
             <p>Nairobi, Kenya</p>
             <p className="mt-2">Phone: <a href="tel:+254116000400" className="text-[#ebb207] hover:underline">0116 000 400</a></p>
           </div>
           <form onSubmit={handleSubmit} className="bg-[#f5f5dc] rounded-lg p-8 shadow-md max-w-lg w-full text-left">
+            <h3 className="text-2xl font-serif font-semibold text-[#080419] mb-4">Send us a Message</h3>
             <div className="mb-4">
               <label htmlFor="name" className="block text-[#080419] font-medium">Name</label>
               <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" />
@@ -390,7 +352,7 @@ const Contact = ({ innerRef, isVisible }) => {
               <label htmlFor="message" className="block text-[#080419] font-medium">Message</label>
               <textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows="4" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"></textarea>
             </div>
-            <button type="submit" className="w-full px-4 py-2 text-lg font-medium text-white bg-[#ebb207] rounded-md hover:bg-[#ebb207] transition-colors duration-300 shadow-lg">
+            <button type="submit" className="w-full px-4 py-2 text-lg font-medium text-[#080419] bg-[#ebb207] rounded-md hover:bg-[#d9a206] transition-colors duration-300 shadow-lg">
               Send Message
             </button>
           </form>
@@ -404,19 +366,16 @@ const Footer = () => (
   <footer className="bg-[#080419] text-[#f5f5dc] py-8">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div className="flex justify-center space-x-6 mb-4">
-        <a href="#" aria-label="Facebook" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
+        <a href="https://www.facebook.com/LeFournilKenya/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.258 1H2.742C1.785 1 1 1.785 1 2.742v18.516c0 .957.785 1.742 1.742 1.742h9.584V14h-2.923v-3.417h2.923V8.5c0-2.887 1.76-4.475 4.364-4.475 1.246 0 2.31.092 2.622.133V7.27h-1.666c-1.31 0-1.564.622-1.564 1.536v2.103h3.48L19.46 14h-3.48v8.995h5.275c.957 0 1.742-.785 1.742-1.742V2.742c0-.957-.785-1.742-1.742-1.742z"/></svg>
         </a>
-        <a href="#" aria-label="Instagram" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
+        <a href="https://www.instagram.com/lefournilkenya/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.771-4.919 4.919-.058.058-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.691-4.771 4.919-4.919.058-.058 1.265-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.435.204-6.73 2.617-6.934 6.934-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.204 4.435 2.617 6.73 6.934 6.934 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.435-.204 6.73-2.617 6.934-6.934.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.204-4.435-2.617-6.73-6.934-6.934zM12 5.5c-3.584 0-6.5 2.916-6.5 6.5s2.916 6.5 6.5 6.5 6.5-2.916 6.5-6.5-2.916-6.5-6.5-6.5zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3.5-9.5c0 .829-.671 1.5-1.5 1.5s-1.5-.671-1.5-1.5.671-1.5 1.5-1.5 1.5.671 1.5 1.5z"/></svg>
         </a>
       </div>
       <div className="text-sm mb-4">
-        <p>Enterprise 45 Industrial Area, Nairobi </p>
-        <p>Phone: <a href="tel:+254116000400" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">0116 000 400</a></p>
       </div>
       <p>&copy; {new Date().getFullYear()} Le Fournil. All Rights Reserved.</p>
-      <p className="text-sm text-[#f5f5dc] mt-2">Crafted with passion in Kenya.</p>
     </div>
   </footer>
 );
@@ -427,13 +386,11 @@ export default function Home() {
   const aboutRef = useRef(null);
   const menuRef = useRef(null);
   const testimonialsRef = useRef(null);
-  const galleryRef = useRef(null);
   const contactRef = useRef(null);
 
   const isAboutVisible = useOnScreen(aboutRef, '-100px');
   const isMenuVisible = useOnScreen(menuRef, '-100px');
   const isTestimonialsVisible = useOnScreen(testimonialsRef, '-100px');
-  const isGalleryVisible = useOnScreen(galleryRef, '-100px');
   const isContactVisible = useOnScreen(contactRef, '-100px');
 
   useEffect(() => {
@@ -443,8 +400,6 @@ export default function Home() {
 
       if (document.getElementById(sections.contact)?.offsetTop < scrollPosition) {
         newActiveSection = sections.contact;
-      } else if (document.getElementById(sections.gallery)?.offsetTop < scrollPosition) {
-        newActiveSection = sections.gallery;
       } else if (document.getElementById(sections.testimonials)?.offsetTop < scrollPosition) {
         newActiveSection = sections.testimonials;
       } else if (document.getElementById(sections.menu)?.offsetTop < scrollPosition) {
@@ -469,6 +424,14 @@ export default function Home() {
 
   return (
     <div className="font-sans">
+      <Head>
+        <title>Le Fournil - Authentic French Bakery in Nairobi</title>
+        <meta name="description" content="Taste the tradition with every bite. Authentic French flavors, crafted with passion in Nairobi, Kenya." />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+      </Head>
       <style dangerouslySetInnerHTML={{ __html: `
         :root {
           scroll-behavior: smooth;
@@ -499,7 +462,6 @@ export default function Home() {
         <About innerRef={aboutRef} isVisible={isAboutVisible} />
         <Menu innerRef={menuRef} isVisible={isMenuVisible} />
         <Testimonials innerRef={testimonialsRef} isVisible={isTestimonialsVisible} />
-        <Gallery innerRef={galleryRef} isVisible={isGalleryVisible} />
         <Contact innerRef={contactRef} isVisible={isContactVisible} />
       </main>
       <Footer />
