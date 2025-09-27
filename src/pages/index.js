@@ -20,7 +20,6 @@ const sections = {
   home: 'home',
   about: 'about',
   menu: 'menu',
-  testimonials: 'testimonials',
   contact: 'contact',
 };
 
@@ -28,7 +27,6 @@ const navItems = [
   { name: 'Home', section: sections.home },
   { name: 'About Us', section: sections.about },
   { name: 'Menu', section: sections.menu },
-  { name: 'Testimonials', section: sections.testimonials },
   { name: 'Contact', section: sections.contact },
 ];
 
@@ -215,7 +213,7 @@ const About = ({ innerRef, isVisible }) => (
         <img src="4.png" alt="Bakery interior" className="rounded-lg shadow-xl" />
       </div>
       <div className={`md:w-1/2 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Story</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Mission</h2>
         <p className="mt-4 text-[#080419] leading-relaxed">
           Le Fournil's mission is to deliver an authentic French bakery experience through exceptional quality, traditional craftsmanship, and a commitment to customer satisfaction. By bringing time-honored recipes and baking techniques to Nairobi, we enrich the local community with genuine French flavors, filling a unique niche in the region.
         </p>
@@ -289,29 +287,7 @@ const Menu = ({ innerRef, isVisible }) => {
   );
 };
 
-const Testimonials = ({ innerRef, isVisible }) => {
-  const testimonials = [
-    { quote: "The best sourdough I've ever had! You can taste the quality and dedication in every slice.", author: "Jane M." },
-    { quote: "Their croissants are simply divine. Flaky, buttery, and perfect with coffee.", author: "John K." },
-    { quote: "Le Fournil's cinnamon rolls are a weekend tradition for my family. Absolutely delicious!", author: "Sarah P." },
-  ];
 
-  return (
-    <section ref={innerRef} id={sections.testimonials} className={`py-20 bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">What Our Customers Say</h2>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className={`p-8 bg-[#080419] text-[#f5f5dc] rounded-lg shadow-md flex flex-col items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`} style={{ transitionDelay: `${index * 100}ms` }}>
-              <p className="text-lg italic">"{testimonial.quote}"</p>
-              <p className="mt-4 text-sm font-semibold">- {testimonial.author}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const Contact = ({ innerRef, isVisible }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -461,7 +437,6 @@ export default function Home() {
         <Hero />
         <About innerRef={aboutRef} isVisible={isAboutVisible} />
         <Menu innerRef={menuRef} isVisible={isMenuVisible} />
-        <Testimonials innerRef={testimonialsRef} isVisible={isTestimonialsVisible} />
         <Contact innerRef={contactRef} isVisible={isContactVisible} />
       </main>
       <Footer />
