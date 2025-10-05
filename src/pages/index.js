@@ -277,7 +277,7 @@ const Menu = ({ innerRef, isVisible }) => {
               <div className="p-6 text-left flex flex-col flex-grow">
                 <h4 className="text-xl font-bold font-serif text-[#080419] mb-1">{item.name}</h4>
                 <p className="text-sm text-gray-600 flex-grow">{item.description}</p>
-                {/* Price removed from here */}
+                {/* Price removed as requested */}
               </div>
             </div>
           ))}
@@ -286,7 +286,6 @@ const Menu = ({ innerRef, isVisible }) => {
     </section>
   );
 };
-
 
 
 const Contact = ({ innerRef, isVisible }) => {
@@ -312,7 +311,7 @@ const Contact = ({ innerRef, isVisible }) => {
             <p className="font-semibold text-lg">Le Fournil Kenya</p>
             <p>Enterprise 45, Industrial Area</p>
             <p>Nairobi, Kenya</p>
-            <p className="mt-2">Phone: <a href="tel:+254116000400" className="text-[#ebb207] hover:underline">0116 000 400</a></p>
+            <p className="mt-2">Phone: <a href="tel:+254116000400" className="text-[#ebb207] hover:underline">0796 867 374</a></p>
           </div>
           <form onSubmit={handleSubmit} className="bg-[#f5f5dc] rounded-lg p-8 shadow-md max-w-lg w-full text-left">
             <h3 className="text-2xl font-serif font-semibold text-[#080419] mb-4">Send us a Message</h3>
@@ -337,19 +336,22 @@ const Contact = ({ innerRef, isVisible }) => {
     </section>
   );
 };
-
 const Footer = () => (
   <footer className="bg-[#080419] text-[#f5f5dc] py-8">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div className="flex justify-center space-x-6 mb-4">
-        <a href="https://www.facebook.com/LeFournilKenya/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
+        {/* Facebook Icon and Link */}
+        <a href="https://web.facebook.com/profile.php?id=61580996723161" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.258 1H2.742C1.785 1 1 1.785 1 2.742v18.516c0 .957.785 1.742 1.742 1.742h9.584V14h-2.923v-3.417h2.923V8.5c0-2.887 1.76-4.475 4.364-4.475 1.246 0 2.31.092 2.622.133V7.27h-1.666c-1.31 0-1.564.622-1.564 1.536v2.103h3.48L19.46 14h-3.48v8.995h5.275c.957 0 1.742-.785 1.742-1.742V2.742c0-.957-.785-1.742-1.742-1.742z"/></svg>
         </a>
-        <a href="https://www.instagram.com/lefournilkenya/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
+        {/* Instagram Icon and Link */}
+        <a href="https://www.instagram.com/le.fournil_ke/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.691 4.771-4.919 4.919-.058.058-1.265.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.07-1.646-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.691-4.771 4.919-4.919.058-.058 1.265-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.435.204-6.73 2.617-6.934 6.934-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.204 4.435 2.617 6.73 6.934 6.934 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.435-.204 6.73-2.617 6.934-6.934.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.204-4.435-2.617-6.73-6.934-6.934zM12 5.5c-3.584 0-6.5 2.916-6.5 6.5s2.916 6.5 6.5 6.5 6.5-2.916 6.5-6.5-2.916-6.5-6.5-6.5zm0 11.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm3.5-9.5c0 .829-.671 1.5-1.5 1.5s-1.5-.671-1.5-1.5.671-1.5 1.5-1.5 1.5.671 1.5 1.5z"/></svg>
         </a>
-      </div>
-      <div className="text-sm mb-4">
+        {/* TikTok Icon and Link - Corrected SVG */}
+        <a href="https://www.tiktok.com/@lefournilkenya?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
+          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.241 6.843c0 1.25-.091 2.375-.246 3.444-.153 1.058-.453 2.052-.878 2.946-.43 .906-1.026 1.688-1.758 2.355-.73.666-1.637 1.156-2.65 1.488-1.018.332-2.155.5-3.395.5-1.026 0-1.996-.1-2.924-.316-.925-.221-1.78-.567-2.545-1.026-.767-.464-1.455-1.053-2.045-1.758-.59-2.035-.87-4.137-.87-6.26.002-1.13.064-2.17.185-3.13.123-.956.353-1.84.697-2.613.344-.77.807-1.425 1.353-1.928.547-.506 1.198-.89 1.93-1.144 2.805-.964 5.92-.61 8.525 1.077 2.628 1.69 4.14 4.887 4.14 8.79zM15.4 6.942v4.868c0 .285-.232.517-.517.517s-.517-.232-.517-.517V7.15c-1.32-.825-2.822-1.29-4.385-1.29-1.365 0-2.6.452-3.664 1.317-1.07.865-1.727 2.062-1.928 3.395-.2.784-.183 1.573-.133 2.35.05.776.223 1.482.527 2.094.305.613.754 1.05 1.32 1.317.56.267 1.25.395 2.06.395.787 0 1.52-.16 2.222-.486.7-.323 1.282-.82 1.76-1.488.475-.67.757-1.46.845-2.355.088-.895.03-1.802-.174-2.72.036-.002.072-.003.108-.003 1.196 0 2.167-.97 2.167-2.167C15.917 7.912 15.65 6.942 15.4 6.942z"/></svg>
+        </a>
       </div>
       <p>&copy; {new Date().getFullYear()} Le Fournil. All Rights Reserved.</p>
     </div>
@@ -361,12 +363,10 @@ export default function Home() {
 
   const aboutRef = useRef(null);
   const menuRef = useRef(null);
-  const testimonialsRef = useRef(null);
   const contactRef = useRef(null);
 
   const isAboutVisible = useOnScreen(aboutRef, '-100px');
   const isMenuVisible = useOnScreen(menuRef, '-100px');
-  const isTestimonialsVisible = useOnScreen(testimonialsRef, '-100px');
   const isContactVisible = useOnScreen(contactRef, '-100px');
 
   useEffect(() => {
@@ -376,8 +376,6 @@ export default function Home() {
 
       if (document.getElementById(sections.contact)?.offsetTop < scrollPosition) {
         newActiveSection = sections.contact;
-      } else if (document.getElementById(sections.testimonials)?.offsetTop < scrollPosition) {
-        newActiveSection = sections.testimonials;
       } else if (document.getElementById(sections.menu)?.offsetTop < scrollPosition) {
         newActiveSection = sections.menu;
       } else if (document.getElementById(sections.about)?.offsetTop < scrollPosition) {
