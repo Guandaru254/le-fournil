@@ -39,12 +39,12 @@ let menuData = {
     { name: 'Pain Complet', description: '', image: '' },
     { name: 'Pain au Lait', description: '', image: '' },
     { name: 'Brioche Raisin ', description: '', image: '' },
-    { name: 'Panini/ Focaccia ', description: '', image: '' },
+    { name: 'Panini Focaccia ', description: '', image: '' },
     { name: 'Ciabatta', description: '', image: '' },
   ],
   'Patisserie': [
-    { name: 'Eclairs ', description: 'Choux pastry filled with rich custard and topped with chocolate ganache.', image: '' },
-    { name: 'Paris Brest', description: 'Ring of choux pastry filled with a praline cream.', image: '' },
+    { name: 'Eclairs ', description: '', image: '' },
+    { name: 'Paris Brest', description: '', image: '' },
     { name: 'Foret Noir', description: '', image: '' },
     { name: 'Tarte aux Fraises ', description: '', image: '' },
     { name: 'Millefeuille', description: '', image: '' },
@@ -183,7 +183,7 @@ const Hero = () => {
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 py-32 sm:py-48 lg:py-64">
         <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif text-[#f5f5dc] leading-tight animate-fade-in-up">
-          TASTE THE TRADITION<br />IN EVERY BITE
+          TASTE THE TRADITION<br />WITH EVERY BITE
         </h1>
         <p className="mt-4 text-lg md:text-xl text-[#f5f5dc] animate-fade-in-up animation-delay-300">
           Authentic French flavors, crafted with passion in Nairobi, Kenya.
