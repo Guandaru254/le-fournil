@@ -3,18 +3,12 @@ import Head from 'next/head';
 
 // --- Helper Functions and Data ---
 
-// Function to shuffle an array
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
-// Array of image filenames
-const menuImages = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png'];
-const shuffledMenuImages = shuffleArray([...menuImages]);
+// Array of image filenames - Order is now consistent
+const menuImages = [
+  '1.webp', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpeg', '7.jpeg', '8.jpeg',
+  '9.jpeg', '10.jpeg', '11.jpeg', '12.jpeg', '13.jpeg', '14.jpeg', '15.jpeg', '16.jpeg',
+  '17.jpeg', '18.jpeg'
+];
 
 const sections = {
   home: 'home',
@@ -23,6 +17,7 @@ const sections = {
   contact: 'contact',
 };
 
+// Navigation Items
 const navItems = [
   { name: 'Home', section: sections.home },
   { name: 'About Us', section: sections.about },
@@ -32,40 +27,37 @@ const navItems = [
 
 let menuData = {
   'Viennoiseries': [
-    { name: 'Croissant', description: 'Flaky, buttery pastry with a rich, golden-brown crust.', image: '' },
-    { name: 'Pain au Chocolat', description: 'Buttery, flaky dough wrapped around two sticks of dark chocolate.', image: '' },
-    { name: 'Pain aux Raisins', description: 'Swirled pastry with custard and plump raisins.', image: '' },
-    { name: 'Torsade', description: 'Twisted pastry with a delicate, sweet filling.', image: '' },
+    { name: 'Croissants', description: '', image: '' },
+    { name: 'Pain au Raisin', description: '', image: '' },
+    { name: 'Pain au Chocolat', description: '', image: '' },
+    { name: 'Torsade Chocolat', description: '', image: '' },
+    { name: 'Croissants Amandes', description: '', image: '' },
+    { name: 'Danish Ananas ', description: '', image: '' },
   ],
-  'French Pastries': [
-    { name: 'Éclair', description: 'Choux pastry filled with rich custard and topped with chocolate ganache.', image: '' },
-    { name: 'Paris-Brest', description: 'Ring of choux pastry filled with a praline cream.', image: '' },
-    { name: 'Tarte au Citron', description: 'A classic lemon tart with a tangy filling and crisp crust.', image: '' },
-    { name: 'Religieuse', description: 'A two-tiered pastry with choux filled with a rich cream.', image: '' },
+  'Boulangerie': [
+    { name: 'Baguette Cereal', description: '', image: '' },
+    { name: 'Pain Complet', description: '', image: '' },
+    { name: 'Pain au Lait', description: '', image: '' },
+    { name: 'Brioche Raisin ', description: '', image: '' },
+    { name: 'Panini/ Focaccia ', description: '', image: '' },
+    { name: 'Ciabatta', description: '', image: '' },
   ],
-  'Fresh Breads': [
-    { name: 'La Baguette', description: 'Long, thin loaf with a crispy crust and an airy crumb.', image: '' },
-    { name: 'Pain de Campagne', description: 'Rustic, round loaf with a sourdough base and a tangy flavor.', image: '' },
-    { name: 'Brioche', description: 'Sweet, rich bread made with eggs and butter for a fluffy texture.', image: '' },
-    { name: 'Pain Complet', description: 'Made with whole wheat flour for a wholesome, dense loaf.', image: '' },
-    { name: 'Pain au noix', description: 'A delicious bread with the rich flavor of walnuts.', image: '' },
-  ],
-  'Light Meals': [
-    { name: 'Croque Monsieur', description: 'Grilled ham and cheese sandwich on brioche bread, topped with bechamel sauce.', image: '' },
-    { name: 'Quiche Lorraine', description: 'Savory tart with bacon, eggs, and cheese in a flaky crust.', image: '' },
-  ],
-  'Coffee & Drinks': [
-    { name: 'Espresso', description: 'A strong, concentrated shot of coffee.', image: '' },
-    { name: 'Café au Lait', description: 'Strong coffee with steamed milk, a French classic.', image: '' },
-    { name: 'Hot Chocolate', description: 'Rich, creamy hot chocolate made with high-quality cocoa.', image: '' },
+  'Patisserie': [
+    { name: 'Eclairs ', description: 'Choux pastry filled with rich custard and topped with chocolate ganache.', image: '' },
+    { name: 'Paris Brest', description: 'Ring of choux pastry filled with a praline cream.', image: '' },
+    { name: 'Foret Noir', description: '', image: '' },
+    { name: 'Tarte aux Fraises ', description: '', image: '' },
+    { name: 'Millefeuille', description: '', image: '' },
+    { name: 'Religieuse', description: '', image: '' },
   ]
 };
 
-// Assign random images to menu items
+// Assign sequential images to menu items to fix randomness
 let imageIndex = 0;
 for (const category in menuData) {
   menuData[category].forEach(item => {
-    item.image = shuffledMenuImages[imageIndex % shuffledMenuImages.length];
+    // Uses modulo to cycle through images if there are more menu items than images
+    item.image = menuImages[imageIndex % menuImages.length];
     imageIndex++;
   });
 }
@@ -184,6 +176,7 @@ const Hero = () => {
 
   return (
     <section id={sections.home} className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+      {/* Background image used from one of the screenshots. Parallax effect restored. */}
       <div className="absolute inset-0 z-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: `url('/IMG-20250902-WA0001 (1).jpg')`, transform: `translateY(${offsetY * 0.5}px)` }}>
         <div className="absolute inset-0 bg-[#080419]/60 backdrop-blur-sm"></div>
@@ -206,12 +199,25 @@ const Hero = () => {
   );
 };
 
+// FIX: Updated About component to make the image container stretch to the height of the text column
 const About = ({ innerRef, isVisible }) => (
-  <section ref={innerRef} id={sections.about} className={`py-20 relative overflow-hidden bg-[#f5f5dc] transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center space-y-12 md:space-y-0 md:space-x-12 relative z-10">
-      <div className={`md:w-1/2 transform transition-all duration-500 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
-        <img src="4.png" alt="Bakery interior" className="rounded-lg shadow-xl" />
+  <section ref={innerRef} id={sections.about} className={`py-20 relative overflow-hidden bg-[#f5f5dc]`}>
+    {/* CRITICAL: Added items-stretch to the flex container */}
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch space-y-12 md:space-y-0 md:space-x-12 relative z-10">
+      
+      {/* Image container */}
+      <div 
+        className={`md:w-1/2 w-full min-h-80 relative transform transition-all duration-500 ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+        style={{ height: '100%' }}
+      >
+        <img 
+          src="3.jpeg" 
+          alt="Assortment of Le Fournil baked goods" 
+          className="rounded-lg shadow-xl w-full h-full object-cover"
+        />
       </div>
+      
+      {/* Text column */}
       <div className={`md:w-1/2 transition-all duration-500 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
         <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#080419]">Our Mission</h2>
         <p className="mt-4 text-[#080419] leading-relaxed">
@@ -221,6 +227,7 @@ const About = ({ innerRef, isVisible }) => (
     </div>
   </section>
 );
+
 
 const Menu = ({ innerRef, isVisible }) => {
   const [selectedCategory, setSelectedCategory] = useState('Viennoiseries');
@@ -268,7 +275,7 @@ const Menu = ({ innerRef, isVisible }) => {
             >
               <div className="relative overflow-hidden h-48 sm:h-56">
                 <img
-                  src={item.image}
+                  src={item.image} // This now uses a predictable image based on its index
                   alt={item.name}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   onError={(e) => e.target.src = "https://placehold.co/400x300/6B4226/EEDFCC?text=Image+Not+Found"}
@@ -277,7 +284,7 @@ const Menu = ({ innerRef, isVisible }) => {
               <div className="p-6 text-left flex flex-col flex-grow">
                 <h4 className="text-xl font-bold font-serif text-[#080419] mb-1">{item.name}</h4>
                 <p className="text-sm text-gray-600 flex-grow">{item.description}</p>
-                {/* Price removed as requested */}
+                {/* Price element was REMOVED as requested. */}
               </div>
             </div>
           ))}
@@ -311,7 +318,7 @@ const Contact = ({ innerRef, isVisible }) => {
             <p className="font-semibold text-lg">Le Fournil Kenya</p>
             <p>Enterprise 45, Industrial Area</p>
             <p>Nairobi, Kenya</p>
-            <p className="mt-2">Phone: <a href="tel:+254116000400" className="text-[#ebb207] hover:underline">0796 867 374</a></p>
+            <p className="mt-2">Phone: <a href="tel:+254796867374" className="text-[#ebb207] hover:underline">0796 867 374</a></p> 
           </div>
           <form onSubmit={handleSubmit} className="bg-[#f5f5dc] rounded-lg p-8 shadow-md max-w-lg w-full text-left">
             <h3 className="text-2xl font-serif font-semibold text-[#080419] mb-4">Send us a Message</h3>
@@ -336,6 +343,7 @@ const Contact = ({ innerRef, isVisible }) => {
     </section>
   );
 };
+
 const Footer = () => (
   <footer className="bg-[#080419] text-[#f5f5dc] py-8">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -350,7 +358,7 @@ const Footer = () => (
         </a>
         {/* TikTok Icon and Link - Corrected SVG */}
         <a href="https://www.tiktok.com/@lefournilkenya?lang=en" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-[#f5f5dc] hover:text-[#ebb207] transition-colors duration-200">
-          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.241 6.843c0 1.25-.091 2.375-.246 3.444-.153 1.058-.453 2.052-.878 2.946-.43 .906-1.026 1.688-1.758 2.355-.73.666-1.637 1.156-2.65 1.488-1.018.332-2.155.5-3.395.5-1.026 0-1.996-.1-2.924-.316-.925-.221-1.78-.567-2.545-1.026-.767-.464-1.455-1.053-2.045-1.758-.59-2.035-.87-4.137-.87-6.26.002-1.13.064-2.17.185-3.13.123-.956.353-1.84.697-2.613.344-.77.807-1.425 1.353-1.928.547-.506 1.198-.89 1.93-1.144 2.805-.964 5.92-.61 8.525 1.077 2.628 1.69 4.14 4.887 4.14 8.79zM15.4 6.942v4.868c0 .285-.232.517-.517.517s-.517-.232-.517-.517V7.15c-1.32-.825-2.822-1.29-4.385-1.29-1.365 0-2.6.452-3.664 1.317-1.07.865-1.727 2.062-1.928 3.395-.2.784-.183 1.573-.133 2.35.05.776.223 1.482.527 2.094.305.613.754 1.05 1.32 1.317.56.267 1.25.395 2.06.395.787 0 1.52-.16 2.222-.486.7-.323 1.282-.82 1.76-1.488.475-.67.757-1.46.845-2.355.088-.895.03-1.802-.174-2.72.036-.002.072-.003.108-.003 1.196 0 2.167-.97 2.167-2.167C15.917 7.912 15.65 6.942 15.4 6.942z"/></svg>
+          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.241 6.843c0 1.25-.091 2.375-.246 3.444-.153 1.058-.453 2.052-.878 2.946-.43.906-1.026 1.688-1.758 2.355-.73.666-1.637 1.156-2.65 1.488-1.018.332-2.155.5-3.395.5-1.026 0-1.996-.1-2.924-.316-.925-.221-1.78-.567-2.545-1.026-.767-.464-1.455-1.053-2.045-1.758-.59-2.035-.87-4.137-.87-6.26.002-1.13.064-2.17.185-3.13.123-.956.353-1.84.697-2.613.344-.77.807-1.425 1.353-1.928.547-.506 1.198-.89 1.93-1.144 2.805-.964 5.92-.61 8.525 1.077 2.628 1.69 4.14 4.887 4.14 8.79zM15.4 6.942v4.868c0 .285-.232.517-.517.517s-.517-.232-.517-.517V7.15c-1.32-.825-2.822-1.29-4.385-1.29-1.365 0-2.6.452-3.664 1.317-1.07.865-1.727 2.062-1.928 3.395-.2.784-.183 1.573-.133 2.35.05.776.223 1.482.527 2.094.305.613.754 1.05 1.32 1.317.56.267 1.25.395 2.06.395.787 0 1.52-.16 2.222-.486.7-.323 1.282-.82 1.76-1.488.475-.67.757-1.46.845-2.355.088-.895.03-1.802-.174-2.72.036-.002.072-.003.108-.003 1.196 0 2.167-.97 2.167-2.167C15.917 7.912 15.65 6.942 15.4 6.942z"/></svg>
         </a>
       </div>
       <p>&copy; {new Date().getFullYear()} Le Fournil. All Rights Reserved.</p>
@@ -402,34 +410,15 @@ export default function Home() {
         <title>Le Fournil - Authentic French Bakery in Nairobi</title>
         <meta name="description" content="Taste the tradition with every bite. Authentic French flavors, crafted with passion in Nairobi, Kenya." />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+        {/*
+          CRITICAL: Google Fonts links were removed from here to _document.js 
+          to resolve the Next.js warning.
+        */}
       </Head>
-      <style dangerouslySetInnerHTML={{ __html: `
-        :root {
-          scroll-behavior: smooth;
-        }
-        body {
-          font-family: 'Lato', sans-serif;
-        }
-        .font-serif {
-          font-family: 'Playfair Display', serif;
-        }
-        @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out;
-        }
-        .animation-delay-300 { animation-delay: 0.3s; }
-        .animation-delay-600 { animation-delay: 0.6s; }
-      `}} />
+      {/* CRITICAL: The inline <style> block has been removed and its contents 
+        should be moved to your global CSS file (e.g., styles/globals.css) 
+        to maintain the custom animations and fonts.
+      */}
       <Header activeSection={activeSection} onNavClick={handleNavClick} />
       <main>
         <Hero />
