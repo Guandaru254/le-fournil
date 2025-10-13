@@ -1,9 +1,6 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Fixes the multiple lockfile/outputFileTracingRoot warning
-  outputFileTracingRoot: path.join(__dirname, '../../'),
+  // All custom configurations removed to allow Vercel's internal file tracing to complete successfully.
 };
 
 module.exports = nextConfig;
