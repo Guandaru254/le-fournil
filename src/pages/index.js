@@ -318,7 +318,7 @@ const Contact = ({ innerRef, isVisible }) => {
             <p className="font-semibold text-lg">Le Fournil Kenya</p>
             <p>Enterprise 45, Industrial Area</p>
             <p>Nairobi, Kenya</p>
-            <p className="mt-2">Phone: <a href="tel:+254796867374" className="text-[#ebb207] hover:underline">0796 867 374</a></p> 
+            <p className="mt-2">Phone: <a href="tel:+254796867374" className="text-[#ebb207] hover:underline">0758 735 052</a></p> 
           </div>
           <form onSubmit={handleSubmit} className="bg-[#f5f5dc] rounded-lg p-8 shadow-md max-w-lg w-full text-left">
             <h3 className="text-2xl font-serif font-semibold text-[#080419] mb-4">Send us a Message</h3>
